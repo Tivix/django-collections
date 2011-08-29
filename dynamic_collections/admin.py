@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from models import *
-
+    
 class CollectionAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Content', {
@@ -15,7 +15,8 @@ class CollectionAdmin(admin.ModelAdmin):
         ('Metadata', {
 #            'classes': ('collapse',),
             'fields': (
-#                       'html_title', 'html_description', 'seo_keywords',
+                       'html_title', 'html_description', 'seo_keywords',
+                       'slug',
 #                       'primary_category', 'secondary_categories',
 #                       'audience_type',
 #                       'featured_service', 'shared_services',
@@ -34,4 +35,5 @@ class CollectionAdmin(admin.ModelAdmin):
         js = ("/static/jquery.min.js", "/static/jquery-ui-1.7.2.custom.min.js",
               "/static/collections.admin.js",)
 
+admin.site.register(CollectionItem)
 admin.site.register(Collection, CollectionAdmin)
