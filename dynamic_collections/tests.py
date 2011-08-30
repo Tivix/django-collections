@@ -1,9 +1,27 @@
+import datetime
+
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
+from models import Collection
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+class CollectionViewsTest(TestCase):
+    "Test the collections pages"
+
+    def test_collection_exists(self):
+        "Check that the collections pages work"
+        
+        response = self.client.get('/collections/slug/')
+        self.assertEqual(response.status_code, 404)
+
+        collection = Collection(create_date=datetime.datetime.now(),
+                                title='Title', subtitle='Article',
+                                description='asdf', text_body='asdf',
+                                slug='slug')
+        collection.save()
+        
+        response = self.client.get(reverse('collection_page', args=[collection.slug]))
+        self.assertEqual(response.status_code, 200)
+        
+        response = self.client.get(reverse('collection_page_items', args=[collection.slug]))
+        self.assertEqual(response.status_code, 200)

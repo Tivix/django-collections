@@ -30,10 +30,10 @@ class CollectionAdmin(admin.ModelAdmin):
     )
     class Media:
         css = {
-            "all": ("/static/jquery_custom_theme/jquery-ui-1.7.2.custom.css",)
+            "all": ("/static/c/jquery_custom_theme/jquery-ui-1.7.2.custom.css",)
         }
-        js = ("/static/jquery.min.js", "/static/jquery-ui-1.7.2.custom.min.js",
-              "/static/collections.admin.js",)
+        js = ("/static/j/jquery.min.js", "/static/j/jquery-ui-1.7.2.custom.min.js",
+              "/static/j/collections.admin.js",)
 
 admin.site.register(CollectionItem)
 admin.site.register(Collection, CollectionAdmin)
