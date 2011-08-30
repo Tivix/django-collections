@@ -4,7 +4,8 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 
-from models import Collection
+from dynamic_collections.models import Collection
+from dynamic_collections.forms import CollectionFilterForm
 
 def collection_page(request, slug, template_name='collections/collection_page.html'):
     "Render the collection"
@@ -19,15 +20,16 @@ def collection_page_items(request, slug, template_name='collections/collection_p
 
     collection = get_object_or_404(Collection, slug=slug)
     
-    type = request.GET.get('type', 'list')
-    per_page = request.GET.get('per_page', 10)
-    page_number = request.GET.get('page', 1)
-    
-    paginator = Paginator(collection.items.all(), int(per_page))
-    page = paginator.page(page_number)
-    
+    form = CollectionFilterForm(request.REQUEST)
+    paginator = Paginator(collection.items.all(), 10)
+    page = paginator.page(1) 
+    if form.is_valid():   
+        paginator = Paginator(collection.items.all(), form.cleaned_data['per_page'])
+        page = paginator.page(form.cleaned_data['page']) 
+        
     return render(request, template_name, {
         'collection': collection,
+        'form': form,
         'items': page.object_list,
         'page': page,
         'paginator': paginator,
