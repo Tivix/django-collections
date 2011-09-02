@@ -3,4 +3,7 @@
 from django.contrib import admin
 from models import *
 
-admin.site.register(Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+    
+admin.site.register(Collection, CollectionAdmin)
