@@ -13,15 +13,13 @@ class Collection(models.Model):
     
     parameters = models.CharField(max_length=255)
     
-    create_timestamp = models.DateTimeField()
+    create_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
     
     #advanced options
     slug = models.SlugField()
     image = models.ImageField(upload_to="collection/", blank=True, null=True)
     
-    def items(self):
-        "Returns a S"
     def get_absolute_url(self):
         return reverse('collection_page', args=[self.slug])
         
@@ -29,5 +27,5 @@ class Collection(models.Model):
         return self.title
     
     class Meta:
-        ordering = ["name"]
+        ordering = ["title"]
 
