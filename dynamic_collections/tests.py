@@ -16,12 +16,8 @@ class CollectionViewsTest(TestCase):
 
         collection = Collection(create_date=datetime.datetime.now(),
                                 title='Title', subtitle='Article',
-                                description='asdf', text_body='asdf',
-                                slug='slug')
+                                description='asdf', slug='slug')
         collection.save()
         
         response = self.client.get(reverse('collection_page', args=[collection.slug]))
-        self.assertEqual(response.status_code, 200)
-        
-        response = self.client.get(reverse('collection_page_items', args=[collection.slug]))
         self.assertEqual(response.status_code, 200)
