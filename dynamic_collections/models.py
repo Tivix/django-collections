@@ -20,6 +20,8 @@ class Collection(models.Model):
     slug = models.SlugField()
     image = models.ImageField(upload_to="collection/", blank=True, null=True)
     
+    def items(self):
+        "Returns a S"
     def get_absolute_url(self):
         return reverse('collection_page', args=[self.slug])
         
@@ -28,3 +30,13 @@ class Collection(models.Model):
     
     class Meta:
         ordering = ["name"]
+        
+class CollectionItem(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    description = models.CharField(max_length=500, blank=True, null=True)
+    image = models.ImageField(upload_to="collection_item/", blank=True, null=True)
+    publish_time = models.DateTimeField(blank=True, null=True)
+    url = models.UrlField(max_length=255, blank=True, null=True)
+    
+    class Meta:
+        abstract = True
