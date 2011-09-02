@@ -2,18 +2,19 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.core.urlresolvers import reverse
-        
+
+
 class Collection(models.Model):
     "Dynamic Collection"
     
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255)
     description = models.TextField()
     
     parameters = models.CharField(max_length=255)
     
-    create_date = models.DateField()
-    update_date = models.DateField(auto_now=True)
+    create_timestamp = models.DateTimeField()
+    update_timestamp = models.DateTimeField(auto_now=True)
     
     #advanced options
     slug = models.SlugField()

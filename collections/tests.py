@@ -14,7 +14,7 @@ class CollectionViewsTest(TestCase):
         response = self.client.get('/collections/slug/')
         self.assertEqual(response.status_code, 404)
 
-        collection = Collection(create_date=datetime.datetime.now(),
+        collection = Collection(create_timestamp=datetime.datetime.now(),
                                 title='Title', subtitle='Article',
                                 description='asdf', slug='slug')
         collection.save()

@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'natgeo.views.home', name='home'),
-     url(r'^collections/', include('dynamic_collections.urls')),
+     url(r'^collections/', include('collections.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
