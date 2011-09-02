@@ -23,5 +23,7 @@
 	});
 </script>
 <div id="collection-items">
-	
+	{% for item in collection.items %}
+		{{item}}
+	{% endfor %}
 </div>

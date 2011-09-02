@@ -158,3 +158,12 @@ LOGGING = {
         },
     }
 }
+
+COLLECTION_SOURCES = {
+
+    'haystack': {
+        'search_indexes': ('NoteIndex', 'FooIndex', ),
+
+    }
+
+}

@@ -13,7 +13,7 @@ class Collection(models.Model):
     parameters = models.CharField(max_length=255)
     
     create_date = models.DateField()
-    update_date = models.DateField()
+    update_date = models.DateField(auto_now=True)
     
     #advanced options
     slug = models.SlugField()
