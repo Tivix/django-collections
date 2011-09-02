@@ -13,6 +13,7 @@ Contents:
    
    introduction
    installation
+   getting_started
    backends
    
    :glob:

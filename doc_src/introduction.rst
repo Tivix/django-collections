@@ -8,9 +8,3 @@ Django Collections is a search interface. Each named Collection is really a pre-
 
 .. _Haystack: http://haystacksearch.org/
 
-COLLECTION_SOURCES = {
-	'haystack': {
-		'search_indexes': ('NoteIndex', 'FooIndex', ),
-		
-	}
-}
