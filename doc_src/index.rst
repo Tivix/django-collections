@@ -3,13 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to app's documentation!
-===============================
+Welcome to django-collection's documentation!
+=============================================
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
+   
+   introduction
+   installation
+   backends
+   
    :glob:
 
 
@@ -19,4 +24,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

@@ -11,7 +11,7 @@ except ImportError:
 import os
 import sys
 
-#insert the parent folder into the python path so we can access collections
+#insert the parent folder into the python path so we can access dynamic_collections
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 head, tail = os.path.split(PROJECT_ROOT)
 sys.path.insert(0, head)

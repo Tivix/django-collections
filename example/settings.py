@@ -133,7 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'collections',
+    'dynamic_collections',
 )
 
 # A sample logging configuration. The only tangible logging
