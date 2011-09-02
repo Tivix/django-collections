@@ -6,7 +6,6 @@ from django.core.paginator import Paginator
 
 from dynamic_collections.models import Collection
 
-
 def collection_page(request, slug, template_name='collections/collection_page.html'):
     "Render the collection"
 
