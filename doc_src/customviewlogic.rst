@@ -27,6 +27,7 @@ Below are the functions you can override.
 Filter further takes a request (giving you information to filter on) and expects a queryset in return, so that you can further filter the objects.
 
 .. code-block:: python
+
 	class CustomCollectionView(DynamicCollectionView):
         
 	    def filter_further(self, request, objects):
@@ -34,7 +35,8 @@ Filter further takes a request (giving you information to filter on) and expects
 	        return objects.filter(title__contains=request.GET['q'])	  
 Below is an example where we filter based on an extra search parameter
 
-.. code-block
+.. code-block:: python
+
 	class CustomCollectionView(DynamicCollectionView):
         
 	    def filter_further(self, request, objects):

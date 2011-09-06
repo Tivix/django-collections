@@ -13,6 +13,7 @@ The get_collection_items function accepts a list of terms (strings) and returns 
 The objects all extend this class:
 
 .. code-block:: python
+
 	class CollectionItem(models.Model):
 	    title = models.CharField(max_length=255, blank=True, null=True)
 	    description = models.CharField(max_length=500, blank=True, null=True)
@@ -29,6 +30,7 @@ In the configuration all you need to specify is the list of Haystack indexes you
 Below is a sample model and index:
 
 .. code-block:: python
+
 	class Person(models.Model):
 	    name = models.CharField(max_length=255, blank=True, null=True)
 	    body = models.CharField(max_length=500, blank=True, null=True)
