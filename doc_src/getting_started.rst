@@ -2,7 +2,8 @@
 
 Getting Started
 ===============
-If you have not installed Django Collections yet, go to the :ref:'installation' page.
+If you have not installed Django Collections yet, go to the :ref:`installation` page.
+
 Django settings
 ***************
 
@@ -12,6 +13,7 @@ The search backend controls how the application gathers its collection items bas
 For example when using the Haystack backend:
 
 .. code-block:: python
+
 	COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack.CollectionsSearchBackend'
     
 Depending on your backend, you may need to set a number of other settings.
