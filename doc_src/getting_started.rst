@@ -1,23 +1,17 @@
-
 Getting Started
 ===============
-
 Django settings
 ***************
 
-There are various simple settings that a Django project would need when using this applications.
+You are required to specify a search backend. 
+The search backend controls how the application gathers its collection items based on parameters. 
+
+For example when using the Haystack backend:
 
 .. code-block:: python
-
-    COLLECTION_SOURCES = {
-        	'haystack': {
-        		'search_indexes': ('NoteIndex', 'FooIndex', ),		
-        	}
-        }
+	COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack.CollectionsSearchBackend'
+    
+Depending on your backend, you may need to set a number of other settings.
 
 
-Specify which backend you'd like to use. For example when using the Haystack backend:
 
-.. code-block:: python
-
-    COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack.CollectionsSearchBackend'

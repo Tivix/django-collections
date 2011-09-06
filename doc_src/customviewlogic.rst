@@ -5,6 +5,7 @@ Custom view logic
 Sometimes you need more than just a generic view.  You may find yourself needing to do some extra filtering on your generic objects.
 
 SOLUTION 1
+**********
 In order to do this, override template_name in the view collection_view.  Within your own template you can customize things any way you want.
 You can also pass extra get parameters to the view and filter based on them.
 
@@ -21,8 +22,7 @@ In order to do this, you'll need to extend the class-based view DynamicCollectio
 DynamicCollectionView has many hook-in functions that allow you change how the view works.
 Below are the functions you can override.
 
-.. code-block:: python
-	filter_further(self, request, objects)
+.. py:method:: filter_further(self, request, objects)
 Filter further takes a request (giving you information to filter on) and expects a queryset in return, so that you can further filter the objects.
 
 Below is an example where we filter based on an extra search parameter
