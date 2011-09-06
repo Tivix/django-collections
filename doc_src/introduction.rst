@@ -1,3 +1,4 @@
+.. _introduction:
 
 ==================================
 Introduction to Django Collections
@@ -9,4 +10,6 @@ It provides a user-friendly way of browsing content of different types, but with
 Django Collections is a search interface. Each named Collection is really a pre-set search. It uses one or more search aggregators, like `Haystack`_\ , to provide the results and drive the filters (facets).
 
 .. _Haystack: http://haystacksearch.org/
+
+Continue with :ref:`installation` 
 

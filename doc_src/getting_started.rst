@@ -1,5 +1,8 @@
+.. _getting_started:
+
 Getting Started
 ===============
+If you have not installed Django Collections yet, go to the :ref:'installation' page.
 Django settings
 ***************
 

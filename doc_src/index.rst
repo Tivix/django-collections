@@ -16,6 +16,7 @@ Contents:
    getting_started
    backends
    customviewlogic
+   api
    
    :glob:
 
