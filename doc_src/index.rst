@@ -15,6 +15,7 @@ Contents:
    installation
    getting_started
    backends
+   customviewlogic
    
    :glob:
 
