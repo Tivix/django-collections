@@ -17,13 +17,19 @@ Such a system is bound to be more complex than writing the corresponding python 
 With National Geographic these filtering options need to include such varied things as filtering by class-type, m2m relations, and custom fields.
 
 SOLUTION 2
-In order to do this, you'll need to extend the class-based view DynamicCollectionView.  DynamicCollectionView has many 
+In order to do this, you'll need to extend the class-based view DynamicCollectionView.  
+DynamicCollectionView has many hook-in functions that allow you change how the view works.
+Below are the functions you can override.
+
+.. code-block:: python
+	filter_further(self, request, objects)
+Filter further takes a request (giving you information to filter on) and expects a queryset in return, so that you can further filter the objects.
 
 Below is an example where we filter based on an extra search parameter
 .. code-block:: python
-class CustomCollectionView(DynamicCollectionView):
+	class CustomCollectionView(DynamicCollectionView):
         
-    def filter_further(self, request, objects):
-        "Override this method if objects needs to be filtered further"
-        return objects.filter(title__contains=request.GET['q'])
+	    def filter_further(self, request, objects):
+	        "Override this method if objects needs to be filtered further"
+	        return objects.filter(title__contains=request.GET['q'])
 *********************************
