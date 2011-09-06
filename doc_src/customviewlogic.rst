@@ -10,12 +10,24 @@ In order to do this, override template_name in the view collection_view.  Within
 You can also pass extra get parameters to the view and filter based on them.
 
 MY QUALMS WITH THIS SOLUTION:
-- We are going to have to come up with some sort of system for mapping GET parameters to filtering options.
-- We cannot simply map things one-to-one, as that would reveal far too much of our backend and leave security holes.
-- We cannot simply encode the parameters, as that would be complicated to implement and code for (and the urls would be ugly).
-- This means we need a system of conversion from GET parameters to filtering methods.
-- Such a system is bound to be more complex than writing the corresponding python code in a hook-in function, for both the writer of the system and the coder who eventually uses it.
-- With National Geographic these filtering options need to include such varied things as filtering by class-type, m2m relations, and custom fields.
+* We are going to have to come up with some sort of system for mapping GET parameters to filtering options.
+* We cannot simply map things one-to-one, as that would reveal far too much of our backend and leave security holes.
+* We cannot simply encode the parameters, as that would be complicated to implement and code for (and the urls would be ugly).
+* This means we need a system of conversion from GET parameters to filtering methods.
+* Even with such a system in place we need a way to pass extra information to the template context.
+* Such a system is bound to be more complex than writing the corresponding python code in a hook-in function, for both the writer of the system and the coder who eventually uses it.
+* Even with such a system in place we need a way to pass extra information to the template context, otherwise where are the extra GET parameters coming from?
+* You may say override the template, but we sometimes filter on dynamic content.  How would this be supplied in this system?
+* With National Geographic these filtering options need to include such varied things as filtering by class-type, m2m relations, and custom fields.
+
+Having to create a conversion method for each filtering type is tying us too closely to the external apps that use this.
+Here is a sample configuration method:  
+For m2m we take a key of m2m_FIELD_NAME_HERE to represent field_name__in and the values are an array of ints.
+For type we take a key of type.  The value of this key is a list of models to limit this query to.
+For field we take a key of the field and we translate it over if its legit.
+If we encode the parameters then the end-coders have to encode the parameters.
+If we make the conversions more pronounced to protect our system we will complicate the system.
+
 
 SOLUTION 2
 **********

@@ -3,11 +3,16 @@
 API Reference
 =============
 
-Collection
+.. contents::
+   :depth: 3
+   
+Models
 ********
-     
-Fields
+   
+Collection
 ------
+
+Fields
 
 * **title** - The title
     * CharField
@@ -35,4 +40,27 @@ Fields
 * **image** - Optional image taken from one of its items
     * ImageField
     * blank=True, null=True
+       
+Backends
+********
+
+backends.haystack.CollectionsSearchBackend
+------
+
+get_collection_items
+~~~~~~
+Returns a haystack SearchQuerySet
     
+Views
+********
+
+DynamicCollectionView
+------
+
+__call__
+~~~~~~
+Represents the view function
+
+filter_further
+~~~~~~
+Hook-in function for filtering the collection items further
