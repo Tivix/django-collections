@@ -18,9 +18,6 @@ class Collection(models.Model):
     #advanced options
     slug = models.SlugField()
     image = models.ImageField(upload_to="collection/", blank=True, null=True)
-    
-    def get_absolute_url(self):
-        return reverse('collection_page', args=[self.slug])
         
     def __unicode__(self):
         return self.title
