@@ -44,13 +44,25 @@ Fields
 Backends
 ********
 
+backends.base.CollectionsSearchBackend
+------
+
+get_collection_items
+~~~~~~
+Needs to be implemented by extension
+
+filter_further
+~~~~~~
+Automatically calls the function COLLECTION_FILTER_FALLBACK from settings if exists
+
 backends.haystack.CollectionsSearchBackend
 ------
 
 get_collection_items
 ~~~~~~
-Returns a haystack SearchQuerySet
+Returns an array of SearchIndexes
     
+
 Views
 ********
 
@@ -60,7 +72,3 @@ DynamicCollectionView
 __call__
 ~~~~~~
 Represents the view function
-
-filter_further
-~~~~~~
-Hook-in function for filtering the collection items further
