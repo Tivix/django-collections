@@ -14,7 +14,7 @@ The objects all extend this class:
 
 .. code-block:: python
 
-	class CollectionItem(models.Model):
+	class CollectionItem(object):
 	    title = models.CharField(max_length=255, blank=True, null=True)
 	    description = models.CharField(max_length=500, blank=True, null=True)
 	    image = models.ImageField(upload_to="collection_item/", blank=True, null=True)
@@ -52,4 +52,3 @@ Below is a sample model and index:
 These indexes are the objects that are returned by the get_collection_items function.
 They are created like normal indexes for Haystack, but they still require the earlier mentioned fields.
 As you can see from the example, the model doesn't need to match field names as long as in the index there is a field mapped over.
-*********************************
