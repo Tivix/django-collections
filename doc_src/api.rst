@@ -44,7 +44,7 @@ Fields
 Backends
 ********
 
-backends.base.CollectionsSearchBackend
+backends.base.CollectionsSearchBackendBase
 ------
 
 get_collection_items

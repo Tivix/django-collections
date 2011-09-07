@@ -5,23 +5,23 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 
 from dynamic_collections.models import Collection
+from dynamic_collections.utils import get_collection_backend
+from dynamic_collections.backends.haystack import CollectionsSearchBackend
 
 class DynamicCollectionView(object):
     
-    def __call__(self, request, slug, template_name='collections/collection_page.html'):
+    def __call__(self, request, slug, template_name='collections/collection_page.html', extra_context={}):
         "Render the collection"
     
         collection = get_object_or_404(Collection, slug=slug)
         
-        objects = []
-        #hooks
-        objects = self.filter_further(request, objects)
+        #get from backend
+#        backend = get_collection_backend()
+        backend = CollectionsSearchBackend()
+        objects = backend.get_collection_items(collection.parameters.split(','))
         
-        return render(request, template_name, {
+        extra_context.update({
             'collection': collection,
             'objects': objects
         })
-        
-    def filter_further(self, request, objects):
-        "Override this method if objects needs to be filtered further"
-        return objects
+        return render(request, template_name, extra_context)
