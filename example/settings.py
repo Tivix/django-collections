@@ -159,11 +159,4 @@ LOGGING = {
     }
 }
 
-COLLECTION_SOURCES = {
-
-    'haystack': {
-        'search_indexes': ('NoteIndex', 'FooIndex', ),
-
-    }
-
-}
+COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack_backend.CollectionsSearchBackend'

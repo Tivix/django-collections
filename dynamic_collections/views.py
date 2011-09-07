@@ -6,7 +6,6 @@ from django.core.paginator import Paginator
 
 from dynamic_collections.models import Collection
 from dynamic_collections.utils import get_collection_backend
-from dynamic_collections.backends.haystack import CollectionsSearchBackend
 
 class DynamicCollectionView(object):
     
@@ -16,9 +15,8 @@ class DynamicCollectionView(object):
         collection = get_object_or_404(Collection, slug=slug)
         
         #get from backend
-#        backend = get_collection_backend()
-        backend = CollectionsSearchBackend()
-        objects = backend.get_collection_items(collection.parameters.split(','))
+        backend = get_collection_backend()
+        objects = backend.get_collection_items(request, collection)
         
         extra_context.update({
             'collection': collection,
