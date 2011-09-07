@@ -28,6 +28,8 @@ For field we take a key of the field and we translate it over if its legit.
 If we encode the parameters then the end-coders have to encode the parameters.
 If we make the conversions more pronounced to protect our system we will complicate the system.
 
+The main gap in this solution that the second solution fills is extra context for the template.  We're going to need extra forms for the extra filtering options we want.
+
 
 SOLUTION 2
 **********
@@ -38,14 +40,11 @@ Below are the functions you can override.
 .. py:method:: filter_further(self, request, objects)
 Filter further takes a request (giving you information to filter on) and expects a queryset in return, so that you can further filter the objects.
 
-.. code-block:: python
-
-	class CustomCollectionView(DynamicCollectionView):
-        
-	    def filter_further(self, request, objects):
-	        "Override this method if objects needs to be filtered further"
-	        return objects.filter(title__contains=request.GET['q'])	  
-Below is an example where we filter based on an extra search parameter
+.. py:method:: extra_context(self, request, objects)
+Extra context takes a request and queryset and returns any extra context the template may need.
+  
+	        
+Below is an example where we filter based on an extra search parameter, as well as pass the extra form to the template
 
 .. code-block:: python
 
@@ -53,5 +52,12 @@ Below is an example where we filter based on an extra search parameter
         
 	    def filter_further(self, request, objects):
 	        "Override this method if objects needs to be filtered further"
-	        return objects.filter(title__contains=request.GET['q'])	        
+	        form = SearchForm(request.GET)
+	        return objects.filter(title__contains=form.cleaned_data['q'])	     
+	        
+	   	def extra_context(self, request, objects):
+	        "Override this method if extra context is needed in the template"
+	        form = SearchForm(request.GET)
+	        return {'form': form}  
+	             
 *********************************
