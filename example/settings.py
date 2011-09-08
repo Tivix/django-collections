@@ -160,3 +160,7 @@ LOGGING = {
 }
 
 COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack_backend.CollectionsSearchBackend'
+
+HAYSTACK_SOLR_URL = 'http://127.0.0.1:8983/solr'
+HAYSTACK_SITECONF = 'example.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'solr'
