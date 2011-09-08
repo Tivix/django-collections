@@ -14,7 +14,7 @@ The get_collection_items function accepts a request and a collection and returns
 It needs to call the function COLLECTIONS_FILTER_CALLBACK from the settings if it exists and apply the function to its objects.
 
 base.CollectionSearchBackend
----------------------------------
+-----------------------------
 Includes a function filter_further that automatically calls COLLECTIONS_FILTER_CALLBACK.  It also requires get_collection_items be implemented by a child class.
 Ideally backends should extend this class.
 
@@ -52,3 +52,4 @@ Below is a sample model and index:
 	    	return Person.objects.all()
     
 These indexes are the objects that are returned by the get_collection_items function.
+
