@@ -17,6 +17,7 @@ Contents:
    backends
    customviewlogic
    api
+   views
    
    :glob:
 

@@ -20,6 +20,7 @@ Depending on your backend, you may need to set a number of other settings.
 
 
 If you want filtering on your objects you will need to specify a callback function.
+You can either set the variable to a function or specify a its location via string.
 
 .. code-block:: python
     
