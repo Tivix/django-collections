@@ -21,7 +21,13 @@ Ideally backends should extend this class.
 haystack.CollectionsSearchBackend
 ---------------------------------
 The haystack CollectionsSearchBackend will use Haystack to get our collection items.
-It's filter_further method works upon a SearchQuerySet.
+If you want to limit the models that are included in the filter you set a setting (COLLECTIONS_HAYSTACK_MODELS) to specify the models you wish to use.
+
+.. code-block:: python
+
+	COLLECTIONS_HAYSTACK_MODELS = ['app.Model', 'app.Model', 'app.Model']
+	
+It's filter_further method works upon a SearchQuerySet.  The get_collection_items function still only returns an array of generic objects.
 
 Below is a sample model and index:
 

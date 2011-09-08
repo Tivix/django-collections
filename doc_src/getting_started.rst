@@ -7,6 +7,8 @@ If you have not installed Django Collections yet, go to the :ref:`installation` 
 Django settings
 ***************
 
+COLLECTIONS_SEARCH_BACKEND
+--------------------------
 You are required to specify a search backend. 
 The search backend controls how the application gathers its collection items based on parameters. 
 
@@ -16,8 +18,9 @@ For example when using the Haystack backend
     
     COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack.CollectionsSearchBackend'
 
+COLLECTIONS_FILTER_CALLBACK
+---------------------------
 Depending on your backend, you may need to set a number of other settings.
-
 
 If you want filtering on your objects you will need to specify a callback function.
 You can either set the variable to a function or specify a its location via string.
@@ -27,6 +30,14 @@ You can either set the variable to a function or specify a its location via stri
     def filter_further(request, objects):
        return objects.filter(title__contains=request.GET['q'])
     COLLECTIONS_FILTER_CALLBACK = filter_further
+    
+COLLECTIONS_HAYSTACK_MODELS
+---------------------------
+If using the haystack backend you can limit the models by specifying an array of strings that map to the models.
+
+.. code-block:: python
+
+	COLLECTIONS_HAYSTACK_MODELS = ['app.Model', 'app.Model', 'app.Model']
     
 :ref:`view` 
 
