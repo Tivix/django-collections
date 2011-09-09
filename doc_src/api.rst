@@ -7,10 +7,10 @@ API Reference
    :depth: 3
    
 Models
-********
+******
    
 Collection
-------
+----------
 
 Fields
 
@@ -72,3 +72,4 @@ DynamicCollectionView
 __call__
 ~~~~~~
 Represents the view function
+

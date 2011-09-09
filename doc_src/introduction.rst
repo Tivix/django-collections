@@ -21,3 +21,4 @@ Potential projects for which this application would be a good fit for:
 .. _Haystack: http://haystacksearch.org/
 
 Continue with :ref:`installation` 
+

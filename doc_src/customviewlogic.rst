@@ -39,5 +39,3 @@ Set these variables in the urls as you would any other view.
 	url(r'^(?P<slug>\w*)/$', DynamicCollectionView(), {
 		'extra_context': ExtraForm()
 	}, name='collection_page')
-
-      

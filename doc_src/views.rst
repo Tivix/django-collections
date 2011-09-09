@@ -13,3 +13,4 @@ Request Walkthrough
 7. Within get_collection_items we need to interact with the correlated db backend to get our objects.
 8. The CollectionSearchBackend then returns the generic array of objects to the view.
 9. The view uses the collection, collection items, template_name, and extra context to render the view.
+

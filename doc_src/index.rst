@@ -9,7 +9,7 @@ Welcome to django-collection's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    
    introduction
    installation
@@ -18,7 +18,6 @@ Contents:
    views
    customviewlogic
    api
-   views
    
    :glob:
 
