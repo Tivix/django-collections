@@ -35,7 +35,7 @@ Ideally backends should extend this class.
 	        "Accepts a request and collection and returns a generic set of objects based on its db backend"
 	        if hasattr(settings, "COLLECTIONS_REQUEST_CLEANER"):
 	            request_cleaner = settings.COLLECTIONS_REQUEST_CLEANER
-	            return self.search(request_cleaner(request, objects))
+	            return self.search(request_cleaner(request))
 	        else:
 	            raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
 

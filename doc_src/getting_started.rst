@@ -28,7 +28,7 @@ You can either set the variable to a function or specify a its location via stri
 
 .. code-block:: python
     
-    def request_haystack_backend_cleaner(request, objects):
+    def request_haystack_backend_cleaner(request):
         d = {}
         form = MyForm(request.GET)
         if form.is_valid():
