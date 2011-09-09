@@ -49,19 +49,20 @@ backends.base.CollectionsSearchBackendBase
 
 get_collection_items
 ~~~~~~
-Needs to be implemented by extension
+Automatically calls the function COLLECTIONS_REQUEST_CLEANER to convert request to appropriate format and then passes that to search()
 
-filter_further_parameters
+search
 ~~~~~~
-Automatically calls the function COLLECTION_FILTER_FALLBACK from settings if exists
+Needs to be implemented by all backends that extend this class
+
 
 backends.haystack.CollectionsSearchBackend
 ------
 
-get_collection_items
+search
 ~~~~~~
 Returns an array of SearchIndexes
-    
+
 
 Views
 ********

@@ -23,7 +23,7 @@ COLLECTIONS_REQUEST_CLEANER
 ---------------------------
 Depending on your backend, you may need to set a number of other settings.
 
-If you want filtering on your objects you will need to specify a cleaner function.
+If you want custom filtering on your objects you will need to specify a cleaner function.
 You can either set the variable to a function or specify a its location via string.
 
 .. code-block:: python

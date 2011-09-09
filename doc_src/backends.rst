@@ -1,7 +1,7 @@
 .. _pluggable:
 
 ==================
-Pluggable backends
+Pluggable Backends
 ==================
 
 This app supports plugging in different backends to get the items in a collection.
@@ -18,7 +18,8 @@ It is called by get_collection_items function, which converts the request to the
 
 base.CollectionSearchBackend
 -----------------------------
-Includes a function filter_further that automatically calls COLLECTIONS_FILTER_CALLBACK.  It also requires get_collection_items be implemented by a child class.
+Includes a function get_collection_items that automatically calls COLLECTIONS_REQUEST_CLEANER and calls search() with its output.  It requires search be implemented by a child class.
+
 Ideally backends should extend this class.
 
 .. code-block:: python
@@ -47,7 +48,18 @@ If you want to limit the models that are included in the filter you set a settin
 
 	COLLECTIONS_HAYSTACK_MODELS = ['app.Model', 'app.Model', 'app.Model']
 	
-It's filter_further method works upon a SearchQuerySet.  The get_collection_items function still only returns an array of generic objects.
+It's search method works upon a dictionary (see below).  The get_collection_items function still only returns an array of generic objects.
+
+.. code-block:: python
+    
+    {
+       'app.Model1': {
+           'var1': [val1, val2....],
+
+       },
+       .
+       .
+    }
 
 Below is a sample model and index:
 
