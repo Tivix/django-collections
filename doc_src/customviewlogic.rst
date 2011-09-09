@@ -37,5 +37,5 @@ Set these variables in the urls as you would any other view.
 .. code-block:: python
 
 	url(r'^(?P<slug>\w*)/$', DynamicCollectionView(), {
-		'extra_context': ExtraForm()
+		'extra_context': {'filter_form': ExtraForm()}
 	}, name='collection_page')
