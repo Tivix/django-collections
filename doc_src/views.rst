@@ -15,3 +15,4 @@ Request Walkthrough
 9. The CollectionSearchBackend then returns the generic array of objects to the view.
 10. The view uses the collection, collection items, template_name, and extra context to render the view.
 
+

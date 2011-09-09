@@ -48,3 +48,4 @@ If using the haystack backend you can limit the models by specifying an array of
 	COLLECTIONS_HAYSTACK_MODELS = ['app.Model1', 'app.Model2', 'app.Model3']
     
 :ref:`view` 
+

@@ -85,3 +85,4 @@ Below is a sample model and index:
     
 These indexes are the objects that are returned by the get_collection_items function.
 
+

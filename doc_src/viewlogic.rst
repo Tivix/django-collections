@@ -17,3 +17,4 @@ Set these variables in the urls as you would any other view.
 		'extra_context': {'filter_form': ExtraForm()},
 		'template_name': 'collections/custom_template.html'
 	}, name='collection_page')
+
