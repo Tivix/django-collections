@@ -10,6 +10,9 @@ You can use backends that come along with the app (see below) or define your own
 
 .. py:method:: get_collection_items(self, request, collection)
 
+The get_collection_items function accepts the request received by the view as well as the collection with the slug received by the view.
+It returns a generic set of objects.
+
 .. py:method:: search(self, backend_cleaned_request_representation)
 
 The search function accepts a backend specific representation of the request and returns a set of generic objects.
