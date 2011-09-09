@@ -10,16 +10,17 @@ Sometimes you need more than just a generic view.  You may find yourself needing
 
 In order to do this, you'll need to implement a filtering callback function.  
 This function is called in the pluggable backends while querying your database.
+It returns the query parameters needed to filter the backend.
 There is a function in CollectionSearchBackend that automatically calls this function from the settings (COLLECTIONS_FILTER_CALLBACK) and has a matching signature.
 While you are not required to extend this class for your backends, it does provide some convenience.
 
 .. code-block:: python
     
-    def filter_further(request, objects):
-       return objects.filter(title__contains=request.GET['q'])
-    COLLECTIONS_FILTER_CALLBACK = filter_further
+    def filter_further_parameters(request, objects):
+       return Q(title__contains=request.GET['q'])
+    COLLECTIONS_FILTER_CALLBACK = filter_further_parameters
     
-.. py:method:: filter_further(self, request, objects)
+.. py:method:: filter_further_parameters(self, request, objects)
 
 This method will pull the function from the settings (if it even exists) and call it with its own parameters.
 This method needs to be called at some point within each CollectionsSearchBackend's get_collection_items method, or they need to implement the calling of the function themselves.

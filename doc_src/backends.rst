@@ -18,6 +18,22 @@ base.CollectionSearchBackend
 Includes a function filter_further that automatically calls COLLECTIONS_FILTER_CALLBACK.  It also requires get_collection_items be implemented by a child class.
 Ideally backends should extend this class.
 
+.. code-block:: python
+
+	class CollectionsSearchBackendBase(object):
+	    "An abstract CollectionsSearchBackend that enforces proper implementation"
+	    
+	    def get_collection_items(self, request, collection):
+	        "Accepts a request and collection and returns a generic set of objects based on its db backend"
+	        raise Exception('get_collection_items is required to be implemented by CollectionsSearchBackend')
+	
+	    def filter_further_parameters(self, request, objects):
+	        "Automatically calls the CALLBACK_FILTER_FUNCTION if it exists"
+	        if hasattr(settings, "CALLBACK_FILTER_FUNCTION"):
+	            filter = settings.CALLBACK_FILTER_FUNCTION
+	            return filter(request, objects)
+	        return () 
+
 haystack.CollectionsSearchBackend
 ---------------------------------
 The haystack CollectionsSearchBackend will use Haystack to get our collection items.

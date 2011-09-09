@@ -51,7 +51,7 @@ get_collection_items
 ~~~~~~
 Needs to be implemented by extension
 
-filter_further
+filter_further_parameters
 ~~~~~~
 Automatically calls the function COLLECTION_FILTER_FALLBACK from settings if exists
 
