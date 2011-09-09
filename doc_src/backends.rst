@@ -38,7 +38,7 @@ Ideally backends should extend this class.
 	        "Accepts a request and collection and returns a generic set of objects based on its db backend"
 	        if hasattr(settings, "COLLECTIONS_REQUEST_CLEANER"):
 	            request_cleaner = settings.COLLECTIONS_REQUEST_CLEANER
-	            self.search(request_cleaner(request, objects))
+	            return self.search(request_cleaner(request, objects))
 	        else:
 	            raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
 
@@ -87,4 +87,5 @@ Below is a sample model and index:
 	    	return Person.objects.all()
     
 These indexes are the objects that are returned by the get_collection_items function.
+
 
