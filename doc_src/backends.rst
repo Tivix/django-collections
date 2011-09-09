@@ -6,12 +6,15 @@ Pluggable backends
 
 This app supports plugging in different backends to get the items in a collection.
 
-You can use backends that come along with the app (see below) or define your own. All backends are required to implement one function:
+You can use backends that come along with the app (see below) or define your own. All backends are required to implement two functions:
 
-.. py:method:: get_collection_items(request, collection)
+.. py:method:: get_collection_items(self, request, collection)
 
-The get_collection_items function accepts a request and a collection and returns a set of generic objects.
-It needs to call the function COLLECTIONS_FILTER_CALLBACK from the settings if it exists and apply the function to its objects.
+.. py:method:: search(self, backend_cleaned_request_representation)
+
+The search function accepts a backend specific representation of the request and returns a set of generic objects.
+It is called by get_collection_items function, which converts the request to the appropriate format by calling the configured function COLLECTIONS_REQUEST_CLEANER from the settings if it exists.
+
 
 base.CollectionSearchBackend
 -----------------------------
@@ -23,16 +26,17 @@ Ideally backends should extend this class.
 	class CollectionsSearchBackendBase(object):
 	    "An abstract CollectionsSearchBackend that enforces proper implementation"
 	    
+	    def search(self, backend_cleaned_request_representation):
+	        "Accepts a cleaned request representation (say a dictionary) and returns a generic set of objects"
+	        raise Exception('search is required to be implemented by CollectionsSearchBackend')
+	    
 	    def get_collection_items(self, request, collection):
 	        "Accepts a request and collection and returns a generic set of objects based on its db backend"
-	        raise Exception('get_collection_items is required to be implemented by CollectionsSearchBackend')
-	
-	    def filter_further_parameters(self, request, objects):
-	        "Automatically calls the CALLBACK_FILTER_FUNCTION if it exists"
-	        if hasattr(settings, "CALLBACK_FILTER_FUNCTION"):
-	            filter = settings.CALLBACK_FILTER_FUNCTION
-	            return filter(request, objects)
-	        return () 
+	        if hasattr(settings, "COLLECTIONS_REQUEST_CLEANER"):
+	            request_cleaner = settings.COLLECTIONS_REQUEST_CLEANER
+	            self.search(request_cleaner(request, objects))
+	        else:
+	            raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
 
 haystack.CollectionsSearchBackend
 ---------------------------------
