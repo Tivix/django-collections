@@ -88,4 +88,15 @@ Below is a sample model and index:
     
 These indexes are the objects that are returned by the get_collection_items function.
 
+models.CollectionSearchBackend
+---------------------------------
+The models CollectionsSearchBackend will use Django models to get our collection items.
+You specify the custom model to use with the COLLECTIONS_DJANGO_MODEL setting.
+
+.. code-block:: python
+
+	COLLECTIONS_DJANGO_MODEL = 'app.Model'
+	
+It's search method gives you access to the queryset methods available for your Django model.
+The model you specify is what is returned by the get_collection_items function.
 

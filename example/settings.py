@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'dynamic_collections',
+    'sample'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -159,8 +160,13 @@ LOGGING = {
     }
 }
 
-COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack_backend.CollectionsSearchBackend'
+COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.models_backend.CollectionsSearchBackend'
 COLLECTIONS_HAYSTACK_INDEXES = []
+
+def request_cleaner(request):
+    return {}
+COLLECTIONS_REQUEST_CLEANER = request_cleaner
+COLLECTIONS_DJANGO_MODEL = 'sample.CollectionItem'
 
 HAYSTACK_SOLR_URL = 'http://127.0.0.1:8983/solr'
 HAYSTACK_SITECONF = 'example.search_sites'
