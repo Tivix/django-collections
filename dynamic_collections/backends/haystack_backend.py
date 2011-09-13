@@ -12,6 +12,8 @@ class CollectionsSearchBackend(CollectionsSearchBackendBase):
 		objects = SearchQuerySet().all()
 		if hasattr(settings, "COLLECTIONS_HAYSTACK_MODELS"):
 			model_list = []
+			if isinstance(backend_cleaned_request_representation, dict):
+				objects = objects.filter(**backend_cleaned_request_representation)
 			for haystack_model in settings.COLLECTIONS_HAYSTACK_MODELS:
 				app_model = haystack_model.split('.')
 				model_list.append(get_model(*app_model))
