@@ -12,7 +12,7 @@ class CollectionsSearchBackend(CollectionsSearchBackendBase):
             django_model = get_model(*app_model)
             
             if isinstance(backend_cleaned_request_representation, dict):
-                return django_model.objects.filter()
+                return django_model.objects.filter(**backend_cleaned_request_representation)
             else:
                 raise Exception('COLLECTIONS_REQUEST_CLEANER for models.CollectionSearchBackend must return a dict of kwargs for the Django model filter function')
         else:

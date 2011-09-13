@@ -133,6 +133,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
+    'haystack',
+    
     'dynamic_collections',
     'sample'
 )
@@ -160,7 +162,7 @@ LOGGING = {
     }
 }
 
-COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.models_backend.CollectionsSearchBackend'
+COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack_backend.CollectionsSearchBackend'
 COLLECTIONS_HAYSTACK_INDEXES = []
 
 def request_cleaner(request):
@@ -168,6 +170,6 @@ def request_cleaner(request):
 COLLECTIONS_REQUEST_CLEANER = request_cleaner
 COLLECTIONS_DJANGO_MODEL = 'sample.CollectionItem'
 
-HAYSTACK_SOLR_URL = 'http://127.0.0.1:8983/solr'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_SITECONF = 'example.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'solr'
+HAYSTACK_WHOOSH_PATH = 'C:\whoosh\dynamic_collections'
