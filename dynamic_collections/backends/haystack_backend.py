@@ -1,6 +1,9 @@
-from dynamic_collections.backends.base import CollectionsSearchBackendBase
+from django.db.models import get_model
+from django.conf import settings
 
 from haystack.query import SearchQuerySet
+
+from dynamic_collections.backends.base import CollectionsSearchBackendBase
 
 class CollectionsSearchBackend(CollectionsSearchBackendBase):
 	"""A backend that uses Haystack to search for objects that belong to this collection."""
