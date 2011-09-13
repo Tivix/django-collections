@@ -170,6 +170,6 @@ def request_cleaner(request):
 COLLECTIONS_REQUEST_CLEANER = request_cleaner
 COLLECTIONS_DJANGO_MODEL = 'sample.CollectionItem'
 
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SITECONF = 'example.search_sites'
-HAYSTACK_WHOOSH_PATH = 'C:\whoosh\dynamic_collections'
+HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'

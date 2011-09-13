@@ -44,7 +44,7 @@ Ideally backends should extend this class.
 
 haystack.CollectionsSearchBackend
 ---------------------------------
-The haystack CollectionsSearchBackend will use Haystack to get our collection items.
+The haystack CollectionsSearchBackend will use Haystack (v1.2.4) to get our collection items.
 If you want to limit the models that are included in the filter you set a setting (COLLECTIONS_HAYSTACK_MODELS) to specify the models you wish to use.
 
 .. code-block:: python
