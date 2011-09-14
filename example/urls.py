@@ -6,10 +6,20 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 admin.autodiscover()
 
+from dynamic_collections.views import DynamicCollectionView
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'natgeo.views.home', name='home'),
      url(r'^collections/', include('dynamic_collections.urls')),
+     
+   url(r'^ajax/(?P<slug>\w*)/$', DynamicCollectionView(), {
+    'template_name': 'ajaxcollection/collection_page.html'
+   }),
+   url(r'^ajax/(?P<slug>\w*)/items/$', DynamicCollectionView(), {
+    'template_name': 'ajaxcollection/collection_items.html'
+   }),
+
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

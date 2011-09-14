@@ -118,6 +118,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ROOT_URLCONF = 'example.urls'
 
 TEMPLATE_DIRS = (
+    os.path.join(PROJECT_ROOT, 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -133,7 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'haystack',
+#    'haystack',
     
     'dynamic_collections',
     'sample'
@@ -162,7 +163,7 @@ LOGGING = {
     }
 }
 
-COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.haystack_backend.CollectionsSearchBackend'
+COLLECTIONS_SEARCH_BACKEND = 'dynamic_collections.backends.models_backend.CollectionsSearchBackend'
 COLLECTIONS_HAYSTACK_INDEXES = []
 
 def request_cleaner(request):
@@ -170,6 +171,6 @@ def request_cleaner(request):
 COLLECTIONS_REQUEST_CLEANER = request_cleaner
 COLLECTIONS_DJANGO_MODEL = 'sample.CollectionItem'
 
-HAYSTACK_SEARCH_ENGINE = 'solr'
-HAYSTACK_SITECONF = 'example.search_sites'
-HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'
+#HAYSTACK_SEARCH_ENGINE = 'solr'
+#HAYSTACK_SITECONF = 'example.search_sites'
+#HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'

@@ -1,0 +1,26 @@
+{% load collections_tags %}
+
+{% if collection.image %}
+<img src="{{ collection.image.url }}" alt="{{ collection }}"/>
+{% endif %}
+<h1>{{ collection.title }}</h1>
+{{ collection.description }}
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#collection-items a").live("click", function(e) {
+			e.preventDefault();
+			$.get($(this).attr("href"), function(res) {
+				$("#collection-items").html(res);
+			});
+			return false;
+		})
+		$.get('items/', function(res) {
+			$("#collection-items").html(res);
+		});
+	});
+</script>
+<div id="collection-items">
+
+</div>
