@@ -41,6 +41,7 @@ Ideally backends should extend this class.
 	            return self.search(request_cleaner(request))
 	        else:
 	            raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
+The COLLECTIONS_REQUEST_CLEANER function returns a dictionary of kwargs for the Django queryset filter method.
 
 haystack.CollectionsSearchBackend
 ---------------------------------
@@ -51,18 +52,7 @@ If you want to limit the models that are included in the filter you set a settin
 
 	COLLECTIONS_HAYSTACK_MODELS = ['app.Model', 'app.Model', 'app.Model']
 	
-It's search method works upon a dictionary (see below).  The get_collection_items function still only returns an array of generic objects.
-
-.. code-block:: python
-    
-    {
-       'app.Model1': {
-           'var1': [val1, val2....],
-
-       },
-       .
-       .
-    }
+The COLLECTIONS_REQUEST_CLEANER function returns a dictionary of kwargs for the SearchQuerySet filter method.  The get_collection_items function still only returns an array of generic objects.
 
 Below is a sample model and index:
 
