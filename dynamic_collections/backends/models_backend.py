@@ -6,7 +6,7 @@ from dynamic_collections.backends.base import CollectionsSearchBackendBase
 class CollectionsSearchBackend(CollectionsSearchBackendBase):
     """A backend that uses Haystack to search for objects that belong to this collection."""
     
-    def search(self, backend_cleaned_request_representation):
+    def search(self, request, backend_cleaned_request_representation):
         if hasattr(settings, "COLLECTIONS_DJANGO_MODEL"):
             app_model = settings.COLLECTIONS_DJANGO_MODEL.split('.')
             django_model = get_model(*app_model)

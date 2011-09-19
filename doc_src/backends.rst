@@ -13,9 +13,9 @@ You can use backends that come along with the app (see below) or define your own
 The get_collection_items function accepts the request received by the view as well as the collection with the slug received by the view.
 It returns a generic set of objects.
 
-.. py:method:: search(self, backend_cleaned_request_representation)
+.. py:method:: search(self, request, backend_cleaned_request_representation)
 
-The search function accepts a backend specific representation of the request and returns a set of generic objects.
+The search function accepts the request and a backend specific representation of the request and returns a set of generic objects.
 It is called by get_collection_items function, which converts the request to the appropriate format by calling the configured function COLLECTIONS_REQUEST_CLEANER from the settings if it exists.
 
 
@@ -30,7 +30,7 @@ Ideally backends should extend this class.
 	class CollectionsSearchBackendBase(object):
 	    "An abstract CollectionsSearchBackend that enforces proper implementation"
 	    
-	    def search(self, backend_cleaned_request_representation):
+	    def search(self, request, backend_cleaned_request_representation):
 	        "Accepts a cleaned request representation (say a dictionary) and returns a generic set of objects"
 	        raise Exception('search is required to be implemented by CollectionsSearchBackend')
 	    
@@ -51,6 +51,15 @@ If you want to limit the models that are included in the filter you set a settin
 .. code-block:: python
 
 	COLLECTIONS_HAYSTACK_MODELS = ['app.Model', 'app.Model', 'app.Model']
+	
+COLLECTIONS_HAYSTACK_MODELS can also be a callback function that accepts a request and returns the array of model strings.
+This callback function can be specified in a string.
+
+.. code-block:: python
+	
+	def haystack_models(request):
+		return ['app.Model', 'app.Model', 'app.Model']
+	COLLECTIONS_HAYSTACK_MODELS = haystack_models
 	
 The COLLECTIONS_REQUEST_CLEANER function returns a dictionary of kwargs for the SearchQuerySet filter method.  The get_collection_items function still only returns an array of generic objects.
 

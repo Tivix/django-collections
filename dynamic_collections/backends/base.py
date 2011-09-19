@@ -5,7 +5,7 @@ from django.core.urlresolvers import get_mod_func
 class CollectionsSearchBackendBase(object):
     "An abstract CollectionsSearchBackend that enforces proper implementation"
     
-    def search(self, backend_cleaned_request_representation):
+    def search(self, request, backend_cleaned_request_representation):
         "Accepts a cleaned request representation (say a dictionary) and returns a generic set of objects"
         raise Exception('search is required to be implemented by CollectionsSearchBackend')
     
@@ -16,6 +16,6 @@ class CollectionsSearchBackendBase(object):
             if not callable(request_cleaner):
                 mod_name, func_name = get_mod_func(request_cleaner)
                 request_cleaner = getattr(import_module(mod_name), func_name)
-            return self.search(request_cleaner(request))
+            return self.search(request, request_cleaner(request))
         else:
             raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
