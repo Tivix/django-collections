@@ -10,19 +10,22 @@ from dynamic_collections.backends.base import CollectionsSearchBackendBase
 class CollectionsSearchBackend(CollectionsSearchBackendBase):
 	"""A backend that uses Haystack to search for objects that belong to this collection."""
 	
-	def search(self, request, backend_cleaned_request_representation):
-		objects = SearchQuerySet().all()
+	def search(self, request, collection, backend_cleaned_request_representation):
+		
+		parameters = ' | '.join(collection.parameters.split(','))
+		
+		objects = SearchQuerySet().filter(content=parameters)
 		if hasattr(settings, "COLLECTIONS_HAYSTACK_MODELS"):
 			haystack_models = settings.COLLECTIONS_HAYSTACK_MODELS
 			
 			#if we're a string pull out the function
 			if isinstance(haystack_models, str):
-                mod_name, func_name = get_mod_func(haystack_models)
-                haystack_models = getattr(import_module(mod_name), func_name)
-                
+				mod_name, func_name = get_mod_func(haystack_models)
+				haystack_models = getattr(import_module(mod_name), func_name)
+
             #if we're a function pull out the models
-            if callable(haystack_models):
-            	haystack_models = haystack_models(request)
+			if callable(haystack_models):
+				haystack_models = haystack_models(request)
             
 			model_list = []
 			if isinstance(backend_cleaned_request_representation, dict):

@@ -56,7 +56,15 @@ search
 Needs to be implemented by all backends that extend this class
 
 
-backends.haystack.CollectionsSearchBackend
+backends.haystack_backend.CollectionsSearchBackend
+------
+
+search
+~~~~~~
+Returns an array of SearchIndexes
+
+
+backends.models_backend.CollectionsSearchBackend
 ------
 
 search

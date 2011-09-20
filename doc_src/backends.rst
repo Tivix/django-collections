@@ -13,9 +13,9 @@ You can use backends that come along with the app (see below) or define your own
 The get_collection_items function accepts the request received by the view as well as the collection with the slug received by the view.
 It returns a generic set of objects.
 
-.. py:method:: search(self, request, backend_cleaned_request_representation)
+.. py:method:: search(self, request, collection, backend_cleaned_request_representation)
 
-The search function accepts the request and a backend specific representation of the request and returns a set of generic objects.
+The search function accepts the request, collection, and a backend specific representation of the request and returns a set of generic objects.
 It is called by get_collection_items function, which converts the request to the appropriate format by calling the configured function COLLECTIONS_REQUEST_CLEANER from the settings if it exists.
 
 
@@ -41,7 +41,6 @@ Ideally backends should extend this class.
 	            return self.search(request_cleaner(request))
 	        else:
 	            raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
-The COLLECTIONS_REQUEST_CLEANER function returns a dictionary of kwargs for the Django queryset filter method.
 
 haystack.CollectionsSearchBackend
 ---------------------------------
@@ -61,7 +60,7 @@ This callback function can be specified in a string.
 		return ['app.Model', 'app.Model', 'app.Model']
 	COLLECTIONS_HAYSTACK_MODELS = haystack_models
 	
-The COLLECTIONS_REQUEST_CLEANER function returns a dictionary of kwargs for the SearchQuerySet filter method.  The get_collection_items function still only returns an array of generic objects.
+The COLLECTIONS_REQUEST_CLEANER function returns a dictionary of kwargs for the SearchQuerySet filter method.  The get_collection_items function still only returns an array of search indexes.
 
 Below is a sample model and index:
 
