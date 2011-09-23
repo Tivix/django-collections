@@ -16,8 +16,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dev.db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -170,7 +170,13 @@ def request_cleaner(request):
     return {}
 COLLECTIONS_REQUEST_CLEANER = request_cleaner
 COLLECTIONS_DJANGO_MODEL = 'sample.CollectionItem'
+COLLECTIONS_DJANGO_FIELD = 'description'
 
 #HAYSTACK_SEARCH_ENGINE = 'solr'
 #HAYSTACK_SITECONF = 'example.search_sites'
 #HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'
+
+try:
+    from local_settings import *
+except ImportError, exp:
+    pass

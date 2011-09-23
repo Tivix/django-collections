@@ -10,7 +10,7 @@ class Collection(models.Model):
     subtitle = models.CharField(max_length=255)
     description = models.TextField()
     
-    parameters = models.CharField(max_length=255)
+    parameters = models.CharField(max_length=255, help_text="A csv field representing the parameters for the backend")
     
     create_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)

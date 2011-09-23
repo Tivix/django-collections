@@ -12,8 +12,8 @@ class CollectionsSearchBackend(CollectionsSearchBackendBase):
 	
 	def search(self, request, collection, backend_cleaned_request_representation):
 		
-		parameters = ' | '.join(collection.parameters.split(','))
-		
+		parameters = ' | '.join(collection.parameters.split(',')).strip(' |')
+
 		objects = SearchQuerySet().filter(content=parameters)
 		if hasattr(settings, "COLLECTIONS_HAYSTACK_MODELS"):
 			haystack_models = settings.COLLECTIONS_HAYSTACK_MODELS
@@ -28,11 +28,13 @@ class CollectionsSearchBackend(CollectionsSearchBackendBase):
 				haystack_models = haystack_models(request)
             
 			model_list = []
-			if isinstance(backend_cleaned_request_representation, dict):
-				objects = objects.filter(**backend_cleaned_request_representation)
 			for haystack_model in haystack_models:
 				app_model = haystack_model.split('.')
 				model_list.append(get_model(*app_model))
 			objects.models(*model_list)
+		
+		if isinstance(backend_cleaned_request_representation, dict):
+			objects = objects.filter(**backend_cleaned_request_representation)
+			
 		return objects
     

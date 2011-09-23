@@ -14,7 +14,8 @@ urlpatterns = patterns('',
      url(r'^collections/', include('dynamic_collections.urls')),
      
    url(r'^ajax/(?P<slug>\w*)/$', DynamicCollectionView(), {
-    'template_name': 'ajaxcollection/collection_page.html'
+    'template_name': 'ajaxcollection/collection_page.html',
+    'load_backend': False
    }),
    url(r'^ajax/(?P<slug>\w*)/items/$', DynamicCollectionView(), {
     'template_name': 'ajaxcollection/collection_items.html'

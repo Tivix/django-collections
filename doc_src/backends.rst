@@ -18,6 +18,11 @@ It returns a generic set of objects.
 The search function accepts the request, collection, and a backend specific representation of the request and returns a set of generic objects.
 It is called by get_collection_items function, which converts the request to the appropriate format by calling the configured function COLLECTIONS_REQUEST_CLEANER from the settings if it exists.
 
+.. code-block:: python
+
+	def request_cleaner(request):
+	    return {'title__in': request.GET['q']}
+	COLLECTIONS_REQUEST_CLEANER = request_cleaner
 
 base.CollectionSearchBackend
 -----------------------------

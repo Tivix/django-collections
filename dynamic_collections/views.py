@@ -9,14 +9,16 @@ from dynamic_collections.utils import get_collection_backend
 
 class DynamicCollectionView(object):
     
-    def __call__(self, request, slug, template_name='collections/collection_page.html', extra_context={}):
+    def __call__(self, request, slug, template_name='collections/collection_page.html', extra_context={}, load_backend=True):
         "Render the collection"
     
         collection = get_object_or_404(Collection, slug=slug)
         
+        objects = []
         #get from backend
-        backend = get_collection_backend()
-        objects = backend.get_collection_items(request, collection)
+        if load_backend:
+            backend = get_collection_backend()
+            objects = backend.get_collection_items(request, collection)
         
         extra_context.update({
             'collection': collection,

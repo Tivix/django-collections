@@ -18,4 +18,4 @@ class CollectionsSearchBackendBase(object):
                 request_cleaner = getattr(import_module(mod_name), func_name)
             return self.search(request, collection, request_cleaner(request))
         else:
-            raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
+            return self.search(request, collection, None)
