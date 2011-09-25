@@ -10,7 +10,7 @@ from dynamic_collections.backends.base import CollectionsSearchBackendBase
 class CollectionsSearchBackend(CollectionsSearchBackendBase):
 	"""A backend that uses Haystack to search for objects that belong to this collection."""
 	
-	def search(self, request, collection, backend_cleaned_request_representation):
+	def search(self, request, collection, filter_parameters, order_parameters):
 		
 		parameters = ' | '.join(collection.parameters.split(',')).strip(' |')
 
@@ -33,8 +33,11 @@ class CollectionsSearchBackend(CollectionsSearchBackendBase):
 				model_list.append(get_model(*app_model))
 			objects.models(*model_list)
 		
-		if isinstance(backend_cleaned_request_representation, dict):
-			objects = objects.filter(**backend_cleaned_request_representation)
+		if isinstance(order_parameters, list):
+			objects = objects.order_by(*order_parameters)
+			
+		if isinstance(filter_parameters, dict):
+			objects = objects.filter(**filter_parameters)
 			
 		return objects
     
