@@ -19,12 +19,12 @@ def get_readme():
     return ''
 
 # Use the docstring of the __init__ file to be the description
-__import__('collections')
-DESC = " ".join(sys.modules['collections'].__doc__.splitlines()).strip()
+__import__('django_collections')
+DESC = " ".join(sys.modules['django_collections'].__doc__.splitlines()).strip()
 
 setup(
-    name = "collections",
-    version = sys.modules['collections'].get_version().replace(' ', '-'),
+    name = "django_collections",
+    version = sys.modules['django_collections'].get_version().replace(' ', '-'),
     url = '',
     license= '',
     author = 'National Geographic',
