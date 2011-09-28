@@ -16,7 +16,7 @@ class CollectionsSearchBackend(CollectionsSearchBackendBase):
                 filter_parameters = {}
             
             if hasattr(settings, "COLLECTIONS_DJANGO_FIELD"):
-                filter_parameters[settings.COLLECTIONS_DJANGO_FIELD + '__search'] = ' | '.join(collection.parameters.split(',')).strip(' |')  
+                filter_parameters[settings.COLLECTIONS_DJANGO_FIELD + '__in'] = collection.parameters.split(',') 
             
             objects = objects.filter(**filter_parameters)
             return objects

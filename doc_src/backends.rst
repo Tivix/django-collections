@@ -13,20 +13,25 @@ You can use backends that come along with the app (see below) or define your own
 The get_collection_items function accepts the request received by the view as well as the collection with the slug received by the view.
 It returns a generic set of objects.
 
-.. py:method:: search(self, request, collection, backend_cleaned_request_representation)
+.. py:method:: search(self, request, collection, filter_parameters, order_parameters)
 
-The search function accepts the request, collection, and a backend specific representation of the request and returns a set of generic objects.
-It is called by get_collection_items function, which converts the request to the appropriate format by calling the configured function COLLECTIONS_REQUEST_CLEANER from the settings if it exists.
+The search function accepts the request, collection, filtering parameters and ordering parameters and returns a set of generic objects.
+It is called by get_collection_items function, which converts gets the filtering and ordering parameters from the request and the cleaner functions, if set.
 
 .. code-block:: python
 
-	def request_cleaner(request):
+	def filter_cleaner(request):
 	    return {'title__in': request.GET['q']}
-	COLLECTIONS_REQUEST_CLEANER = request_cleaner
+	COLLECTIONS_FILTER_CLEANER = filter_cleaner
+	
+	
+	def order_cleaner(request):
+	    return [request.GET['order']]
+	COLLECTIONS_ORDER_CLEANER = order_cleaner
 
 base.CollectionSearchBackend
 -----------------------------
-Includes a function get_collection_items that automatically calls COLLECTIONS_REQUEST_CLEANER and calls search() with its output.  It requires search be implemented by a child class.
+Includes a function get_collection_items that automatically calls COLLECTIONS_FILTER_CLEANER and COLLECTIONS_ORDER_CLEANER and calls search() with its output.  It requires search be implemented by a child class.
 
 Ideally backends should extend this class.
 
@@ -35,21 +40,21 @@ Ideally backends should extend this class.
 	class CollectionsSearchBackendBase(object):
 	    "An abstract CollectionsSearchBackend that enforces proper implementation"
 	    
-	    def search(self, request, backend_cleaned_request_representation):
+	    
+	    def search(self, request, collection, filter_parameters, order_parameters):
 	        "Accepts a cleaned request representation (say a dictionary) and returns a generic set of objects"
 	        raise Exception('search is required to be implemented by CollectionsSearchBackend')
 	    
 	    def get_collection_items(self, request, collection):
 	        "Accepts a request and collection and returns a generic set of objects based on its db backend"
-	        if hasattr(settings, "COLLECTIONS_REQUEST_CLEANER"):
-	            request_cleaner = settings.COLLECTIONS_REQUEST_CLEANER
-	            return self.search(request_cleaner(request))
-	        else:
-	            raise Exception('COLLECTIONS_REQUEST_CLEANER setting not defined')
+	        
+	        filter_cleaner = request.COLLECTIONS_FILTER_CLEANER
+	        order_cleaner = request.COLLECTIONS_ORDER_CLEANER
+	        return self.search(request, collection, filter_cleaner(request), order_cleaner(request))
 
 haystack.CollectionsSearchBackend
 ---------------------------------
-The haystack CollectionsSearchBackend will use Haystack (v1.2.4) to get our collection items.
+The haystack CollectionsSearchBackend will use Haystack (v1.2.5) to get our collection items.
 If you want to limit the models that are included in the filter you set a setting (COLLECTIONS_HAYSTACK_MODELS) to specify the models you wish to use.
 
 .. code-block:: python
@@ -65,7 +70,9 @@ This callback function can be specified in a string.
 		return ['app.Model', 'app.Model', 'app.Model']
 	COLLECTIONS_HAYSTACK_MODELS = haystack_models
 	
-The COLLECTIONS_REQUEST_CLEANER function returns a dictionary of kwargs for the SearchQuerySet filter method.  The get_collection_items function still only returns an array of search indexes.
+The COLLECTIONS_FILTER_CLEANER function returns a dictionary of kwargs for the SearchQuerySet filter method.
+The COLLECTIONS_ORDER_CLEANER function returns an array of args for the SearchQuerySet order_by method.  
+The get_collection_items function still only returns an array of search indexes.
 
 Below is a sample model and index:
 
@@ -102,4 +109,3 @@ You specify the custom model to use with the COLLECTIONS_DJANGO_MODEL setting.
 	
 It's search method gives you access to the queryset methods available for your Django model.
 The model you specify is what is returned by the get_collection_items function.
-
