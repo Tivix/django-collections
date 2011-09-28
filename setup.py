@@ -19,12 +19,12 @@ def get_readme():
     return ''
 
 # Use the docstring of the __init__ file to be the description
-__import__('collections')
-DESC = " ".join(sys.modules['collections'].__doc__.splitlines()).strip()
+__import__('dynamic_collections')
+DESC = " ".join(sys.modules['dynamic_collections'].__doc__.splitlines()).strip()
 
 setup(
-    name = "collections",
-    version = sys.modules['collections'].get_version().replace(' ', '-'),
+    name = "dynamic_collections",
+    version = sys.modules['dynamic_collections'].get_version().replace(' ', '-'),
     url = '',
     license= '',
     author = 'National Geographic',
