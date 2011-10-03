@@ -175,9 +175,17 @@ COLLECTIONS_DJANGO_MODEL = 'sample.CollectionItem'
 COLLECTIONS_DJANGO_FIELD = 'description'
 
 HAYSTACK_ENABLE_REGISTRATIONS = True
-HAYSTACK_SEARCH_ENGINE = 'solr'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_SITECONF = 'example.search_sites'
 HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'
+
+TINYMCE_JS_URL = 'http://debug.example.org/tiny_mce/tiny_mce_src.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste,searchreplace",
+    'theme': "advanced",
+}
+TINYMCE_SPELLCHECKER = False
+TINYMCE_COMPRESSOR = False
 
 try:
     from local_settings import *
