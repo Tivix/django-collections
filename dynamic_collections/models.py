@@ -8,7 +8,7 @@ class Collection(models.Model):
     
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255)
-    body_text = models.TextField()
+    body_text = models.TextField(blank=True, null=True)
     
     parameters = models.CharField(max_length=255, help_text="A csv field representing the parameters for the backend")
     
